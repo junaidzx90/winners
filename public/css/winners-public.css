@@ -1,0 +1,60 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+ @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+ div#winners_check__code {
+    width: 360px;
+    display: inline-block;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.win__alerts {
+    width: 100%;
+    text-align: center;
+}
+button.win__send {
+    border-color: #eaeaea;
+    background: #2196f312;
+    color: #484848;
+    font-size: 16px;
+    padding: 5px 20px;
+    color: #656565;
+    margin-left: 10px;
+    height: 42px;
+}
+button.win__send:active{
+    border-color: #28a745;
+}
+input#win__mycode {
+    height: 42px;
+    border: 2px solid #eaeaea;
+}
+input#win__mycode:focus-visible {
+    outline-color: #28a745;
+}
+div#winners_check__code .input {
+    display: flex;
+}
+.win__alerts h5 {
+    color: #525252;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 6px;
+    margin-bottom: 19px;
+}
+p.warning {
+    color: #ff8100;
+    letter-spacing: 1.2px;
+}
+p.success {
+    color: #28a745;
+    letter-spacing: 1.2px;
+}
+p.loading {
+    transform: scale(2.5);
+}
