@@ -100,10 +100,9 @@ class Winners_Public {
 
 		if(isset($_POST['code']) && !empty($_POST['code'])){
 			$mycode = intval($_POST['code']);
-			$codes = get_option('winners_comparing_codes');
-			$separet_str = explode(",",$codes);
+			$code = get_option('winners_comparing_codes');
 			
-			if(in_array($mycode, $separet_str)){
+			if($mycode == $code){
 				global $wpdb;
 				$user_id = get_current_user_id(  );
 				$position = 0;
@@ -130,7 +129,11 @@ class Winners_Public {
 				if($mypos == 10){
 					echo '<p class="success"><i class="fas fa-check-circle"></i> '.get_option('winners_special_coupon_text').'</p>';
 				}else{
-					echo '<p class="success"><i class="fas fa-check-circle"></i> '.get_option('winners_winner_text').'</p>';
+					if($wpdb->get_var("SELECT ID FROM {$wpdb->prefix}winners_list WHERE user_id = $user_id AND code = '$mycode' AND position = 10")){
+						echo '<p class="success"><i class="fas fa-check-circle"></i> You already got special coupon for this '.$mycode.'.</p>';
+					}else{
+						echo '<p class="success"><i class="fas fa-check-circle"></i> '.get_option('winners_winner_text').'</p>';
+					}
 				}
 				die;
 			}else{

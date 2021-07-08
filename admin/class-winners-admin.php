@@ -90,9 +90,9 @@ class Winners_Admin {
 		// winners settings
 		add_settings_section( 'winners_settings_section', '', '', 'winners_settings_page' );
 
-		// Defined codes
-		add_settings_field( 'winners_comparing_codes', 'Defined codes', [$this,'winners_comparing_codes_cb'], 'winners_settings_page', 'winners_settings_section');
-		register_setting( 'winners_settings_section', 'winners_comparing_codes');
+		// Defined code
+		add_settings_field( 'winners_comparing_code', 'Defined code', [$this,'winners_comparing_code_cb'], 'winners_settings_page', 'winners_settings_section');
+		register_setting( 'winners_settings_section', 'winners_comparing_code');
 		
 		// match text
 		add_settings_field( 'winners_winner_text', 'Winner match text', [$this,'winners_winner_text_cb'], 'winners_settings_page', 'winners_settings_section');
@@ -107,13 +107,12 @@ class Winners_Admin {
 		register_setting( 'winners_settings_section', 'winners_notmatch_text');
 
 		// Check input info
-		add_settings_field( 'winners_input_box_headline', 'Check input info', [$this,'winners_input_box_headline_cb'], 'winners_settings_page', 'winners_settings_section');
+		add_settings_field( 'winners_input_box_headline', 'Check input heading', [$this,'winners_input_box_headline_cb'], 'winners_settings_page', 'winners_settings_section');
 		register_setting( 'winners_settings_section', 'winners_input_box_headline');
 	}
 
-	function winners_comparing_codes_cb(){
-		echo '<input  class="widefat" type="text" placeholder="Code,Code" value="'.get_option('winners_comparing_codes').'" name="winners_comparing_codes">';
-		echo '<p>Use a comma to separate each code.</p>';
+	function winners_comparing_code_cb(){
+		echo '<input  class="widefat" type="text" placeholder="Code" value="'.get_option('winners_comparing_code').'" name="winners_comparing_code">';
 	}
 	function winners_notmatch_text_cb(){
 		echo '<input  class="widefat" type="text" placeholder="text" value="'.get_option('winners_notmatch_text').'" name="winners_notmatch_text">';

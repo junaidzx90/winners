@@ -19,13 +19,14 @@
 
 <div class="winners_wrap">
     <div id="winners_opt_tbl">
+    
     <?php
     echo '<form action="options.php" method="post" id="winners_settings_section">';
     echo '<table class="widefat">';
 
     settings_fields( 'winners_settings_section' );
     do_settings_fields( 'winners_settings_page', 'winners_settings_section' );
-
+    echo '<tr><th>Output</th><td><strong>[winners]</strong></td><tr>';
     echo '</table>';
     submit_button();
     echo '</form>';
