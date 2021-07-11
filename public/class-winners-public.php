@@ -83,61 +83,47 @@ class Winners_Public {
 		$output = ob_get_contents();
 		ob_get_clean();
 
-		if(is_user_logged_in(  )){
-			return $output;
-		}else{
-			return "Please login to see!";
-		}
+		return $output;
 	}
 
 	function check_my_code_validity(){
 		if(!wp_verify_nonce( $_POST['nonce'], 'winners_nonce' )){
 			die("Hey! what are you doing here.");
 		}
-		if(!is_user_logged_in(  )){
-			return;
-		}
 
 		if(isset($_POST['code']) && !empty($_POST['code'])){
-			$mycode = intval($_POST['code']);
-			$code = get_option('winners_comparing_codes');
+			$mycode = $_POST['code'];
+			$code = get_option('winners_comparing_code');
 			
 			if($mycode == $code){
 				global $wpdb;
-				$user_id = get_current_user_id(  );
+				if(!isset($_COOKIE['winner_user'])){
+					setcookie('winner_user','0',time()+60*60*24*30, '/');
+				}
+				
 				$position = 0;
 				$position = get_option('winner_pos');
 
-				if($position == 10){
-					$position = 0;
-					update_option('winner_pos', $position);
-				}
-
-				if(!$wpdb->get_var("SELECT ID FROM {$wpdb->prefix}winners_list WHERE user_id = $user_id AND code = '$mycode'")){
-					$insert = $wpdb->insert($wpdb->prefix.'winners_list',array(
-						'user_id' 		=> $user_id,
-						'position' 		=> $position+1,
-						'code' 			=> $mycode,
-						'create_date' 	=> date('d-m-y')
-					),array('%d','%d','%s','%s'));
-					
+				if($_COOKIE['winner_user'] !== $mycode){
+					setcookie('winner_user',$mycode,time()+60*60*24*30, '/');
 					update_option('winner_pos', $position+1);
 				}
 
-				$mypos = $wpdb->get_var("SELECT position FROM {$wpdb->prefix}winners_list WHERE user_id = $user_id AND code = '$mycode'");
+				if($position == 10){
+					$position = 1;
+					update_option('winner_pos', $position);
+				}
 
-				if($mypos == 10){
-					echo '<p class="success"><i class="fas fa-check-circle"></i> '.get_option('winners_special_coupon_text').'</p>';
+				if(intval(get_option('winner_pos')) == 10){
+					echo json_encode(array('success' => '<p class="success"><i class="fas fa-check-circle"></i> '.get_option('winners_special_coupon_text').'</p>'));
+					setcookie('winner_notification','You already won a special coupon.',time()+60*60*24*30, '/');
 				}else{
-					if($wpdb->get_var("SELECT ID FROM {$wpdb->prefix}winners_list WHERE user_id = $user_id AND code = '$mycode' AND position = 10")){
-						echo '<p class="success"><i class="fas fa-check-circle"></i> You already got special coupon for this '.$mycode.'.</p>';
-					}else{
-						echo '<p class="success"><i class="fas fa-check-circle"></i> '.get_option('winners_winner_text').'</p>';
-					}
+					echo json_encode(array('success' => '<p class="success"><i class="fas fa-check-circle"></i> '.get_option('winners_winner_text').'</p>'));
+					setcookie('winner_notification','You already won a coupon.',time()+60*60*24*30, '/');
 				}
 				die;
 			}else{
-				echo '<p class="warning"><i class="fas fa-warning"></i> '.get_option('winners_notmatch_text').'</p>';
+				echo json_encode(array('error' => '<p class="warning"><i class="fas fa-warning"></i> '.get_option('winners_notmatch_text').'</p>'));
 				die;
 			}
 			

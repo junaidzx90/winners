@@ -32,43 +32,4 @@
     echo '</form>';
     ?>
     </div>
-
-    <div class="users_list">
-        <div class="winners_users">
-            <table id="winners_table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>User Id</th>
-                        <th>User Name</th>
-                        <th>Code</th>
-                        <th>Position</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    global $wpdb;
-                    $user_list = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}winners_list ORDER BY position DESC");
-
-                    if($user_list){
-                        $i = 1;
-                        foreach($user_list as $winuser){
-                            $user_name = get_user_by( 'ID', $winuser->user_id )->display_name;
-                            echo '<tr>';
-                            echo '<td>'.$i.'</td>';
-                            echo '<td>'.intval($winuser->user_id).'</td>';
-                            echo '<td>'.ucfirst($user_name).'</td>';
-                            echo '<td>'.$winuser->code.'</td>';
-                            echo '<td>'.$winuser->position.'</td>';
-                            echo '<td>'.$winuser->create_date.'</td>';
-                            echo '</tr>';
-                            $i++;
-                        }
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
 </div>

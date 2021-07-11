@@ -25,10 +25,21 @@
         
         <div class="progress">
             <!-- Alert shows here -->
+            <?php
+            if(isset($_COOKIE['winner_notification'])){
+                echo '<p class="success"><i class="fas fa-check-circle"></i> '.$_COOKIE['winner_notification'].'</p>';
+            }
+            ?>
         </div>
     </div>
     <div class="input">
         <input type="text" placeholder="My code" id="win__mycode">
-        <button class="win__send button-secondary">Check</button>
+        <?php 
+        $disable = '';
+        if(isset($_COOKIE['winner_user'])){
+            $disable = 'disabled';
+        }
+        ?>
+        <button <?php echo $disable; ?> class="win__send button-secondary">Check</button>
     </div>
 </div>

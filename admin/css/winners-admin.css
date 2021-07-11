@@ -7,24 +7,9 @@
     display: flex;
 }
 div#winners_opt_tbl {
-    width: 40%;
-}
-.users_list {
-    margin-left: 20px;
     width: 50%;
 }
+
 div#winners_opt_tbl table{
     padding: 20px;
-}
-#winners_table thead th, #winners_table tbody td{
-    text-align: left !important;
-}
-@media screen and (max-width: 768px){
-    .winners_wrap{
-        flex-direction: column;
-    }
-    #winners_opt_tbl,.users_list{
-        width: 98% !important;
-        margin-left: 0 !important;
-    }
 }

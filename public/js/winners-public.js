@@ -8,6 +8,7 @@ jQuery(function( $ ) {
 	})
 
 	$('.win__send').on("click", function () {
+		let btn = $(this);
 		let code = $('#win__mycode').val();
 		if (code !== "") {
 			$.ajax({
@@ -21,8 +22,17 @@ jQuery(function( $ ) {
 				beforeSend: () => {
 					$('.progress').html('<p class="loading"><i class="fas fa-spinner fa-pulse"></i></p>');
 				},
+				dataType: 'json',
 				success: function (response) {
-					$('.progress').html(response);
+					if (response.success) {
+						btn.prop('disabled', true);
+						$('.progress').html(response.success);
+					}
+
+					if (response.error) {
+						$('.progress').html(response.error);
+					}
+					
 				}
 			});	
 		} else {

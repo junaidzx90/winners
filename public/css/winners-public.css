@@ -34,12 +34,17 @@ button.win__send:active{
 input#win__mycode {
     height: 42px;
     border: 2px solid #eaeaea;
+	width: 80%;
+}
+.progress p {
+    margin-bottom: 18px;
 }
 input#win__mycode:focus-visible {
     outline-color: #28a745;
 }
 div#winners_check__code .input {
     display: flex;
+    width: 100%;
 }
 .win__alerts h5 {
     color: #525252;
@@ -57,4 +62,9 @@ p.success {
 }
 p.loading {
     transform: scale(2.5);
+}
+button.win__send:disabled {
+    background: #dddddd4f;
+    border: none;
+    color: #ddd;
 }

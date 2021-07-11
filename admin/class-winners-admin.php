@@ -61,7 +61,6 @@ class Winners_Admin {
 	 */
 	public function enqueue_styles() {
 		if(isset($_GET['page']) && $_GET['page'] == 'winners'){
-			wp_enqueue_style( 'dataTable', plugin_dir_url( __FILE__ ) . 'css/dataTable.css', array(), $this->version, 'all' );
 			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/winners-admin.css', array(), $this->version, 'all' );
 		}
 	}
@@ -73,7 +72,6 @@ class Winners_Admin {
 	 */
 	public function enqueue_scripts() {
 		if(isset($_GET['page']) && $_GET['page'] == 'winners'){
-			wp_enqueue_script( 'dataTable', plugin_dir_url( __FILE__ ) . 'js/dataTable.js', array( 'jquery' ), $this->version, false );
 			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/winners-admin.js', array( 'jquery' ), $this->version, false );
 		}
 	}
