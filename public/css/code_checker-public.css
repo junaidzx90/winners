@@ -3,7 +3,7 @@
  * included in this file.
  */
  @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
- div#winners_check__code {
+ div#code_checker_check__code {
     width: 360px;
     display: inline-block;
     padding: 20px;
@@ -29,7 +29,7 @@ button.win__send {
     height: 42px;
 }
 button.win__send:active{
-    border-color: #28a745;
+    border-color: #2196f3;
 }
 input#win__mycode {
     height: 42px;
@@ -40,9 +40,9 @@ input#win__mycode {
     margin-bottom: 18px;
 }
 input#win__mycode:focus-visible {
-    outline-color: #28a745;
+    outline-color: #2196f3;
 }
-div#winners_check__code .input {
+div#code_checker_check__code .input {
     display: flex;
     width: 100%;
 }
@@ -57,7 +57,7 @@ p.warning {
     letter-spacing: 1.2px;
 }
 p.success {
-    color: #28a745;
+    color: #2196f3;
     letter-spacing: 1.2px;
 }
 p.loading {
@@ -67,4 +67,20 @@ button.win__send:disabled {
     background: #dddddd4f;
     border: none;
     color: #ddd;
+}
+.counter-box {
+    padding: 10px;
+    background: #2196f3;
+    color: #fff;
+    font-size: 28px;
+    font-weight: 600;
+    font-family: initial;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border: 2px solid #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 12px #2196f3;
 }

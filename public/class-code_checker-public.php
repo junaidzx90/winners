@@ -6,8 +6,8 @@
  * @link       https://www.fiverr.com/junaidzx90
  * @since      1.0.0
  *
- * @package    Winners
- * @subpackage Winners/public
+ * @package    Code_checker
+ * @subpackage Code_checker/public
  */
 
 /**
@@ -16,11 +16,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the public-facing stylesheet and JavaScript.
  *
- * @package    Winners
- * @subpackage Winners/public
+ * @package    Code_checker
+ * @subpackage Code_checker/public
  * @author     Md Junayed <admin@easeare.com>
  */
-class Winners_Public {
+class Code_checker_Public {
 
 	/**
 	 * The ID of this plugin.
@@ -52,7 +52,8 @@ class Winners_Public {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
-		add_shortcode( 'winners', [$this,'wiiners_input_view'] );
+		add_shortcode( 'code_checker', [$this,'code_checker_input_view'] );
+		add_shortcode( 'check_counter', [$this,'code_checker_check_counter'] );
 	}
 
 	/**
@@ -61,7 +62,7 @@ class Winners_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_styles() {
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/winners-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/code_checker-public.css', array(), microtime(), 'all' );
 	}
 
 	/**
@@ -70,16 +71,16 @@ class Winners_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/winners-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/code_checker-public.js', array( 'jquery' ), microtime(), false );
 		wp_localize_script($this->plugin_name, "check_my_code", array(
 			'ajaxurl' 	=> 	admin_url('admin-ajax.php'),
-			'nonce'		=>	wp_create_nonce( 'winners_nonce' )
+			'nonce'		=>	wp_create_nonce( 'code_checker_nonce' )
 		));
 	}
 	
-	function wiiners_input_view($param){
+	function code_checker_input_view($param){
 		ob_start();
-		require_once plugin_dir_path( __FILE__ ).'partials/winners-public-display.php';
+		require_once plugin_dir_path( __FILE__ ).'partials/code_checker-public-display.php';
 		$output = ob_get_contents();
 		ob_get_clean();
 
@@ -87,43 +88,34 @@ class Winners_Public {
 	}
 
 	function check_my_code_validity(){
-		if(!wp_verify_nonce( $_POST['nonce'], 'winners_nonce' )){
+		if(!wp_verify_nonce( $_POST['nonce'], 'code_checker_nonce' )){
 			die("Hey! what are you doing here.");
 		}
 
 		if(isset($_POST['code']) && !empty($_POST['code'])){
 			$mycode = $_POST['code'];
-			$code = get_option('winners_comparing_code');
+			$code = get_option('code_checker_comparing_code');
 			
-			if($mycode == $code){
+			if($mycode === $code){
 				global $wpdb;
-				if(!isset($_COOKIE['winner_user'])){
-					setcookie('winner_user','0',time()+60*60*24*30, '/');
-				}
 				
 				$position = 0;
 				$position = get_option('winner_pos');
 
-				if($_COOKIE['winner_user'] !== $mycode){
-					setcookie('winner_user',$mycode,time()+60*60*24*30, '/');
-					update_option('winner_pos', $position+1);
+				if($position == intval(get_option( 'code_checker_counter_limit' ))){
+					$position = 0;
 				}
 
-				if($position == 10){
-					$position = 1;
-					update_option('winner_pos', $position);
-				}
+				update_option('winner_pos', $position+1);
 
-				if(intval(get_option('winner_pos')) == 10){
-					echo json_encode(array('success' => '<p class="success"><i class="fas fa-check-circle"></i> '.get_option('winners_special_coupon_text').'</p>'));
-					setcookie('winner_notification','You already won a special coupon.',time()+60*60*24*30, '/');
+				if(intval(get_option('winner_pos')) == intval(get_option('code_checker_special_pos'))){
+					echo json_encode(array('success' => '<p class="success"><i class="fas fa-check-circle"></i> '.get_option('code_checker_special_coupon_text').'</p>','counter' => $position+1));
 				}else{
-					echo json_encode(array('success' => '<p class="success"><i class="fas fa-check-circle"></i> '.get_option('winners_winner_text').'</p>'));
-					setcookie('winner_notification','You already won a coupon.',time()+60*60*24*30, '/');
+					echo json_encode(array('success' => '<p class="success"><i class="fas fa-check-circle"></i> '.get_option('code_checker_winner_text').'</p>','counter' => $position+1));
 				}
 				die;
 			}else{
-				echo json_encode(array('error' => '<p class="warning"><i class="fas fa-warning"></i> '.get_option('winners_notmatch_text').'</p>'));
+				echo json_encode(array('error' => '<p class="warning"><i class="fas fa-warning"></i> '.get_option('code_checker_notmatch_text').'</p>'));
 				die;
 			}
 			
@@ -131,6 +123,13 @@ class Winners_Public {
 		}
 
 		die;
+	}
+
+	function code_checker_check_counter(){
+		$output = '<div class="counter-box"><span id="checkCounter">';
+		$output .= get_option('winner_pos');
+		$output .= '</span></div>';
+		return $output;
 	}
 
 }

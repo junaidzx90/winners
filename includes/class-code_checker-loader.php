@@ -6,8 +6,8 @@
  * @link       https://www.fiverr.com/junaidzx90
  * @since      1.0.0
  *
- * @package    Winners
- * @subpackage Winners/includes
+ * @package    Code_checker
+ * @subpackage Code_checker/includes
  */
 
 /**
@@ -17,11 +17,11 @@
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    Winners
- * @subpackage Winners/includes
+ * @package    Code_checker
+ * @subpackage Code_checker/includes
  * @author     Md Junayed <admin@easeare.com>
  */
-class Winners_Loader {
+class Code_checker_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

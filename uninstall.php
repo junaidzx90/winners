@@ -22,7 +22,7 @@
  * @link       https://www.fiverr.com/junaidzx90
  * @since      1.0.0
  *
- * @package    Winners
+ * @package    Code_checker
  */
 
 // If uninstall not called from WordPress, then exit.

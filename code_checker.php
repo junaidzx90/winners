@@ -10,18 +10,18 @@
  *
  * @link              https://www.fiverr.com/junaidzx90
  * @since             1.0.0
- * @package           Winners
+ * @package           Code checker
  *
  * @wordpress-plugin
- * Plugin Name:       Winners
- * Plugin URI:        https://github.com/junaidzx90/winners
+ * Plugin Name:       Code checker
+ * Plugin URI:        https://github.com/junaidzx90/code_checker
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
  * Version:           1.0.1
  * Author:            Md Junayed
  * Author URI:        https://www.fiverr.com/junaidzx90
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       winners
+ * Text Domain:       code_checker
  * Domain Path:       /languages
  */
 
@@ -39,30 +39,30 @@ define( 'WINNERS_VERSION', '1.0.1' );
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-winners-activator.php
+ * This action is documented in includes/class-code_checker-activator.php
  */
-function activate_winners() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-winners-activator.php';
-	Winners_Activator::activate();
+function activate_code_checker() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-code_checker-activator.php';
+	Code_checker_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-winners-deactivator.php
+ * This action is documented in includes/class-code_checker-deactivator.php
  */
-function deactivate_winners() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-winners-deactivator.php';
-	Winners_Deactivator::deactivate();
+function deactivate_code_checker() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-code_checker-deactivator.php';
+	Code_checker_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_winners' );
-register_deactivation_hook( __FILE__, 'deactivate_winners' );
+register_activation_hook( __FILE__, 'activate_code_checker' );
+register_deactivation_hook( __FILE__, 'deactivate_code_checker' );
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-winners.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-code_checker.php';
 
 /**
  * Begins execution of the plugin.
@@ -73,10 +73,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-winners.php';
  *
  * @since    1.0.0
  */
-function run_winners() {
+function run_code_checker() {
 
-	$plugin = new Winners();
+	$plugin = new Code_checker();
 	$plugin->run();
 
 }
-run_winners();
+run_code_checker();

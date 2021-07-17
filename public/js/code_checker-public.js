@@ -8,7 +8,6 @@ jQuery(function( $ ) {
 	})
 
 	$('.win__send').on("click", function () {
-		let btn = $(this);
 		let code = $('#win__mycode').val();
 		if (code !== "") {
 			$.ajax({
@@ -25,14 +24,13 @@ jQuery(function( $ ) {
 				dataType: 'json',
 				success: function (response) {
 					if (response.success) {
-						btn.prop('disabled', true);
+						$('#checkCounter').text(response.counter);
 						$('.progress').html(response.success);
 					}
 
 					if (response.error) {
 						$('.progress').html(response.error);
 					}
-					
 				}
 			});	
 		} else {

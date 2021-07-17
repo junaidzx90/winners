@@ -1,0 +1,22 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+
+ .code_checker_wrap {
+    display: flex;
+}
+div#code_checker_opt_tbl {
+    width: 50%;
+}
+
+div#code_checker_opt_tbl table{
+    padding: 20px;
+}
+button#counter-reset {
+    color: orangered;
+    border-color: orangered;
+}
+button#counter-reset:focus {
+    box-shadow: 0 0 2px #ff0099;
+}

@@ -9,8 +9,8 @@
  * @link       https://www.fiverr.com/junaidzx90
  * @since      1.0.0
  *
- * @package    Winners
- * @subpackage Winners/includes
+ * @package    Code_checker
+ * @subpackage Code_checker/includes
  */
 
 /**
@@ -20,11 +20,11 @@
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    Winners
- * @subpackage Winners/includes
+ * @package    Code_checker
+ * @subpackage Code_checker/includes
  * @author     Md Junayed <admin@easeare.com>
  */
-class Winners_i18n {
+class Code_checker_i18n {
 
 
 	/**
@@ -35,7 +35,7 @@ class Winners_i18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'winners',
+			'code_checker',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);
