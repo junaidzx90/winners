@@ -93,8 +93,8 @@ class Code_checker_Public {
 		}
 
 		if(isset($_POST['code']) && !empty($_POST['code'])){
-			$mycode = $_POST['code'];
-			$code = get_option('code_checker_comparing_code');
+			$mycode = strtolower($_POST['code']);
+			$code = strtolower(get_option('code_checker_comparing_code'));
 			
 			if($mycode === $code){
 				global $wpdb;
